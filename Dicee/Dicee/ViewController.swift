@@ -1,55 +1,35 @@
 //
 //  ViewController.swift
-//  Dicee
+//  Dicee-iOS13
 //
-//  Created by Tim Krull on 6/24/18.
-//  Copyright © 2018 Tim Krull. All rights reserved.
+//  Created by Angela Yu on 11/06/2019.
+//  Copyright © 2019 London App Brewery. All rights reserved.
 //
 
 import UIKit
 
 class ViewController: UIViewController {
 	
-	var randomDiceIndex1: Int = 0
-	var randomDiceIndex2: Int = 0
+	@IBOutlet weak var diceImageView1: UIImageView! // left dice imageView
+	@IBOutlet weak var diceImageView2: UIImageView! // right dice imageView
 	
-	let diceArray = ["dice1", "dice2", "dice3", "dice4", "dice5", "dice6"]
-	
-	@IBOutlet weak var diceImageView1: UIImageView!
-	@IBOutlet weak var diceImageView2: UIImageView!
+	let diceArray = [#imageLiteral(resourceName: "DiceOne"), #imageLiteral(resourceName: "DiceTwo"), #imageLiteral(resourceName: "DiceThree"), #imageLiteral(resourceName: "DiceFour"), #imageLiteral(resourceName: "DiceFive"), #imageLiteral(resourceName: "DiceSix")] // array of dice images available
 	
 	override func viewDidLoad() {
-		super.viewDidLoad()
-		
-		updateDiceImages()
-		
-	}//viewDidLoad()
+        super.viewDidLoad()
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}//didReceiveMemoryWarning()
+    }
 
+	// action for roll button press
 	@IBAction func rollButtonPressed(_ sender: UIButton) {
 		
-		updateDiceImages()
+		// chooses a random dice image from diceArray for the left dice image
+		diceImageView1.image = diceArray.randomElement()
+		// chooses a random dice image from diceArray for the right dice image
+		diceImageView2.image = diceArray.randomElement()
 		
-	}//rollButtonPressed(UIButton)
+	}
 	
-	func updateDiceImages(){
-		
-		randomDiceIndex1 = Int(arc4random_uniform(6))
-		randomDiceIndex2 = Int(arc4random_uniform(6))
-		
-		diceImageView1.image = UIImage(named: diceArray[randomDiceIndex1])
-		diceImageView2.image = UIImage(named: diceArray[randomDiceIndex2])
-		
-	}//updateDiceImages()
 	
-	override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
-		
-		updateDiceImages()
-		
-	}//motionEnded(UIEventSubtype, UIEvent?)
 }
 
